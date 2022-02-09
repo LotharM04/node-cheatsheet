@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Test page</title>
+</head>
+<body>
+
+<form method="post" action="/" id="form">
+    <div>
+        <input type="email" placeholder="email@example.com" name="email"/>
+    </div>
+    <div>
+        <input type="password" placeholder="password" name="password"/>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(() => {
+        $('#form').submit((event) => {
+            event.preventDefault();
+            $.ajax({
+                url: '/',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify($('#form').serializeArray()),
+                success: (res) => {
+                    console.log("successful ajax response");
+                    console.log(res);
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
